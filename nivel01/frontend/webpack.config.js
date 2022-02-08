@@ -5,11 +5,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "bundle.js",
-    publicPath: 'public/'
   },
-  devServer: {
-    static: path.join(__dirname, "public"),
-  },
+  mode: 'development',
   module: {
     rules: [
       {
