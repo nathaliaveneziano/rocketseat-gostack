@@ -20,20 +20,27 @@ function App() {
 
   useEffect(() => {
     api.get("projects").then((response) => {
-      setProjects(response.data)
+      setProjects(response.data);
     });
   }, []);
   // 1. Qual função deseja disparar
   // 2. Quando disparar essa função
 
-  function handleAddProject() {
+  async function handleAddProject() {
     // projects.push(`Novo Projeto ${Date.now()}`);
 
     // Imutabilidade -> copia as informações do array e adiciona as novas informações
     // spread operator ([...array], {...object}) -> percorre o elemento e copia cada posição/chave do elemento
-    setProjects([...projects, `Novo Projeto ${Date.now()}`]);
+    // setProjects([...projects, `Novo Projeto ${Date.now()}`]);
 
-    console.log(projects);
+    const response = await api.post("projects", {
+      title: `Novo Projeto ${Date.now()}`,
+      owner: "Diego Fernandes",
+    });
+
+    const project = response.data;
+
+    setProjects([...projects, project]);
   }
 
   return (
